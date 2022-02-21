@@ -4,12 +4,18 @@
 **Author Name**: Ahmad Masadeh
 
 ## WRRC
-![WRRC](./assets/WRRC.jpg)
+![WRRC](./assets/WRRC2.jpg)
 
 ## Overview
-Best Server Ever
+Best Server Ever to Movies
 ## Getting Started
-Just open the the main page 
+1. Clone this repo.
+2. Cd to repo local directory.
+3. npm init -y.
+4. npm install express cors.
 
 ## Project Features
-Movies Details
+- Movies Details
+- Search Movies
+- Search Popular Movies
+- Search latest Movies
