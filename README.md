@@ -4,7 +4,7 @@
 **Author Name**: Ahmad Masadeh
 
 ## WRRC
-![WRRC](./assets/WRRC3.jpg)
+![WRRC](./assets/WRRC4.jpg)
 
 ## Overview
 Best Server Ever to Movies
@@ -23,6 +23,32 @@ Best Server Ever to Movies
 12. app.use(express.json()) (top of the all end points)
 13. build the function that insert in database
 14. build a function that get from the database
+
+15. We built an end point to get a specific record from the database:
+
+    1. We created an endpoint with a variable name (id)(/path/:id)
+    2. We created the Handler
+    3. We got the id from req.params.id
+    4. We add the SELECT statement from the database based on the id.
+    5. We returned the result.rows
+
+16. We built an end point to update a specific record in the database:
+
+    1. We created an endpoint with a variable name (id)(/path/:id)
+    2. We created our Handler
+    3. We got the id from req.params.id
+    4. We got the new data from req.body
+    5. We did the UPDATE statement for the database and we retune the updated 
+    6. We returned to the client the updated data with status 200
+
+17. We built an end point to delete a specific record from database based on the id:
+
+    1. We created an endpoint with a variable name (id)(/path/:id)
+    2. We created our Handler
+    3. We got the id from req.params.id
+    4. We did the DELETE statement fro the database
+    5. We return a response with status of 204 and an empty object.
+
 
 ## Project Features
 - Movies Details
