@@ -28,6 +28,9 @@ app.get("/popular", popularHandler);
 app.get("/latest", latestHandler);
 app.get("/getMovies", getMoviesHandler);
 app.post("/addMovie", addMovieHandler);
+app.get("/favMovie/:id", favMovieHandler);
+app.put("/updatefavMovie/:id", updatefavMovieHandler);
+app.delete("/deleteFavMovie/:id", deleteFavMovieHandler);
 app.use("*", notFoundHandler);
 app.use(errorHandler);
 
@@ -177,6 +180,61 @@ function movieHandler(req, res) {
 
 function favoriteHandler(req, res) {
   return res.status(201).json("Welcome to Favorite Page");
+}
+
+function favMovieHandler(req, res) {
+  let id = req.params.id;
+  const sql = `SELECT * FROM addmovie WHERE id=$1;`;
+  const values = [id];
+
+  client
+    .query(sql, values)
+    .then((result) => {
+      return res.status(200).json(result.rows[0]);
+    })
+    .catch((error) => {
+      errorHandler(error, req, res);
+    });
+}
+
+function updatefavMovieHandler(req, res) {
+  const id = req.params.id;
+  const recipe = req.body;
+
+  const sql = `UPDATE addmovie SET title=$1, release_date=$2,poster_path=$3, overview=$4, comment=$5 WHERE id=$6 RETURNING *`;
+  const values = [
+    recipe.title,
+    recipe.release_date,
+    recipe.poster_path,
+    recipe.overview,
+    recipe.comment,
+    id,
+  ];
+
+  client
+    .query(sql, values)
+    .then((result) => {
+      return res.status(200).json(result.rows);
+    })
+    .catch((error) => {
+      errorHandler(error, req, res);
+    });
+}
+
+function deleteFavMovieHandler(req, res) {
+  const id = req.params.id;
+
+  const sql = `DELETE FROM addmovie WHERE id=$1;`;
+  const values = [id];
+
+  client
+    .query(sql, values)
+    .then(() => {
+      return res.status(204).json({});
+    })
+    .catch((error) => {
+      errorHandler(error, req, res);
+    });
 }
 
 function notFoundHandler(req, res) {
