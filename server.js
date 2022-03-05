@@ -8,12 +8,13 @@ const pg = require("pg");
 const app = express();
 const APIKEY = process.env.APIKEY;
 const PORT = process.env.PORT;
+const cors = require("cors")
 const DATABASE_URL = process.env.DATABASE_URL;
 const client = new pg.Client({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
-//const client = new pg.Client(DATABASE_URL);
+// const client = new pg.Client(DATABASE_URL);
 
 function Movie(id, title, release_date, poster_path, overview) {
   this.id = id;
@@ -23,6 +24,7 @@ function Movie(id, title, release_date, poster_path, overview) {
   this.overview = overview;
 }
 
+app.use(cors());
 app.use(express.json());
 app.get("/", movieHandler);
 app.get("/favorite", favoriteHandler);
